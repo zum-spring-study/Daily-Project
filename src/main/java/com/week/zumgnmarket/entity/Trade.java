@@ -26,6 +26,7 @@ public class Trade {
     @JoinColumn(name = "consumer_id")
     private Member consumer;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "consumer_suggest_status")
     private BuyStatus consumerSuggestStatus;
 
@@ -46,5 +47,9 @@ public class Trade {
         this.consumerSuggestStatus = consumerSuggestStatus;
         this.consumerSuggestPrice = consumerSuggestPrice;
         this.product = product;
+    }
+
+    public void updateStatus(TradeStatus status) {
+        this.status = status;
     }
 }

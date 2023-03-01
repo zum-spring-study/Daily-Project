@@ -15,7 +15,6 @@ public class BuyFacade {
     public TradeResponse buy(Long productId, TradeRequest tradeRequest) {
 
         try{
-
             purchaseProcessor.process(productId, tradeRequest);
             return TradeResponse.of(productId, true, "구매 요청 성공");
 

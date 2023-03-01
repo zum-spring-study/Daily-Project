@@ -45,15 +45,21 @@ public class PurchaseProcessor {
 
         if (tradeRequest.isDirectStatus()) {
             Trade trade = directTradeService.purchase(product, buyer, seller, tradeRequest);
+
             saveTradeSchedule(trade, tradeRequest.getScheduleDate());
+            productStatusUpdate(product);
 
         } else if (tradeRequest.isScheduleStatus()) {
             Trade trade = scheduleTradeService.purchase(product, buyer, seller, tradeRequest);
+
             saveTradeSchedule(trade, tradeRequest.getScheduleDate());
+            productStatusUpdate(product);
 
         } else if (tradeRequest.isAuctionStatus()) {
             Trade trade = auctionTradeService.purchase(product, buyer, seller, tradeRequest);
+
             saveTradeSchedule(trade, tradeRequest.getScheduleDate());
+            productStatusUpdate(product);
 
         } else {
             throw new IllegalArgumentException("거래 방식이 존재하지 않습니다.");
@@ -78,8 +84,14 @@ public class PurchaseProcessor {
     }
 
     private void saveTradeSchedule (Trade trade, LocalDate tradeDate) {
+        trade.updateStatus(TradeStatus.SUGGEST);
         tradeRepository.save(trade);
         tradeScheduleRepository.save(new TradeSchedule(trade, tradeDate));
+    }
+
+    private void productStatusUpdate(Product product) {
+        product.updateStatus(TradeStatus.SUGGEST);
+        productRepository.save(product);
     }
 
 }
