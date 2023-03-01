@@ -2,7 +2,7 @@ package com.week.zumgnmarket.endpoint.trade.facade;
 
 import com.week.zumgnmarket.endpoint.trade.dto.buy.TradeRequest;
 import com.week.zumgnmarket.endpoint.trade.dto.buy.TradeResponse;
-import com.week.zumgnmarket.service.trade.PurchaseProcessor;
+import com.week.zumgnmarket.service.trade.buyer.PurchaseProcessor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

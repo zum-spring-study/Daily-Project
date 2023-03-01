@@ -9,8 +9,21 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TradeSellRequest {
-
-    private Long productId;
     private SellStatus tradeStatus;
+
     private String description;
+
+    public Boolean isTureStatus() {
+        return tradeStatus == SellStatus.TRUE;
+    }
+
+    public Boolean isFalseStatus() {
+        return tradeStatus == SellStatus.FALSE;
+    }
+
+
+    public Boolean isRequestStatus() {
+        return tradeStatus == SellStatus.REQUEST;
+    }
+
 }

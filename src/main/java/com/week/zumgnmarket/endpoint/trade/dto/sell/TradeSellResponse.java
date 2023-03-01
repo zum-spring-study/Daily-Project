@@ -14,4 +14,12 @@ public class TradeSellResponse {
     private SellStatus tradeStatus;
     private String description;
 
+    public static TradeSellResponse of(Long productId, SellStatus tradeStatus, String description) {
+        return TradeSellResponse.builder()
+                .productId(productId)
+                .tradeStatus(tradeStatus)
+                .description(description)
+                .build();
+    }
+
 }
