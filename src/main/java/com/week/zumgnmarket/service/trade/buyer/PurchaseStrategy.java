@@ -1,4 +1,4 @@
-package com.week.zumgnmarket.service.trade;
+package com.week.zumgnmarket.service.trade.buyer;
 
 import com.week.zumgnmarket.endpoint.trade.dto.buy.TradeRequest;
 import com.week.zumgnmarket.entity.Member;
