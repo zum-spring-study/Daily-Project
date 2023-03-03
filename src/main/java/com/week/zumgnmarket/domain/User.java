@@ -1,12 +1,13 @@
 package com.week.zumgnmarket.domain;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.week.zumgnmarket.application.dto.UserRequest;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
+@Builder
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Table(name = "user")
@@ -24,4 +25,10 @@ public class User {
     @JoinColumn(name = "town_idx")
     private Town town;
 
+    public static User of(UserRequest userDto, Town town) {
+        return User.builder()
+                .nickName(userDto.getNickName())
+                .town(town)
+                .build();
+    }
 }
