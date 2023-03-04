@@ -9,6 +9,7 @@ import com.week.zumgnmarket.repository.UserQueryDslRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+
 @Service
 @RequiredArgsConstructor
 public class ItemService {
@@ -19,10 +20,6 @@ public class ItemService {
     public ItemResponse saveItem(ItemRequest itemDto) {
         User user = userQueryDslRepository.findById(itemDto.getSellerId());
         itemRepository.save(Item.of(itemDto, user));
-        return findByItemName(itemDto.getItemName());
-    }
-
-    private ItemResponse findByItemName(String itemName) {
-        return ItemResponse.of(itemRepository.findByItemName(itemName));
+        return ItemResponse.of(itemDto, user);
     }
 }
