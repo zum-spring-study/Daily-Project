@@ -17,27 +17,25 @@ public class ItemQueryDslRepository {
 
     private final JPAQueryFactory jpaQueryFactory;
 
+
     /**
-     * 자신의 동네에 올라온 중고 거래 물품 리스트를 조회한다
-     * @param townId 동네 id
+     * 지역에 해당하는 중고 거래 물품 리스트를 조회한다.
+     * @param region 지역명
      * @return
      */
-    public List<Item> findAllByTown(Integer townId) {
+    public List<Item> findAllByRegion(String region) {
         return jpaQueryFactory.selectFrom(item)
+                .join(item.seller, user).fetchJoin()
                 .join(item.town, town).fetchJoin()
-                .where(town.id.eq(townId))
+                .where(town.region.eq(region))
                 .fetch();
     }
 
-    /**
-     * 자신이 판매한 중고 거래 물품 리스트를 조회한다
-     * @param userId 판매자 id
-     * @return
-     */
-    public List<Item> findAllByUser(Integer userId) {
+    public Item findById(Integer id) {
         return jpaQueryFactory.selectFrom(item)
                 .join(item.seller, user).fetchJoin()
-                .where(user.id.eq(userId))
-                .fetch();
+                .join(item.town, town).fetchJoin()
+                .where(item.id.eq(id))
+                .fetchOne();
     }
 }

@@ -1,19 +1,19 @@
 package com.week.zumgnmarket.domain;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
+@Builder
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Table(name = "shopping_list")
-public class ShoppingList {
+@Table(name = "shop")
+public class Shop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "shopping_idx")
+    @Column(name = "shop_idx")
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -23,4 +23,11 @@ public class ShoppingList {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_idx")
     private Item item;
+
+    public static Shop of(User buyer, Item item) {
+        return Shop.builder()
+                .buyer(buyer)
+                .item(item)
+                .build();
+    }
 }

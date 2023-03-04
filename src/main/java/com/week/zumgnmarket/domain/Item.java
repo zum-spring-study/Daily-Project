@@ -44,4 +44,8 @@ public class Item {
                 .tradeStatus(itemDto.isTradeStatus())
                 .build();
     }
+
+    public void updateStatus(boolean status) {
+        this.tradeStatus = status;
+    }
 }

@@ -4,7 +4,7 @@ import com.week.zumgnmarket.application.dto.UserRequest;
 import com.week.zumgnmarket.application.dto.UserResponse;
 import com.week.zumgnmarket.domain.Town;
 import com.week.zumgnmarket.domain.User;
-import com.week.zumgnmarket.repository.TownRepository;
+import com.week.zumgnmarket.repository.TownJpaRepository;
 import com.week.zumgnmarket.repository.UserJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import java.util.Optional;
 public class UserService {
 
     private final UserJpaRepository userRepository;
-    private final TownRepository townRepository;
+    private final TownJpaRepository townRepository;
 
     public UserResponse saveUser(UserRequest userDto) {
         if (checkNickNameDuplicate(userDto.getNickName())) {
