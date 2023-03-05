@@ -1,13 +1,12 @@
 package com.week.zumgnmarket.user.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
 import com.week.zumgnmarket.common.domain.BaseEntity;
 import com.week.zumgnmarket.item.domain.Items;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
@@ -25,7 +24,6 @@ public class User extends BaseEntity {
 
 	@Embedded
 	private Items items;
-
 
 	public User(String name, String email, String password) {
 		this.name = name;
