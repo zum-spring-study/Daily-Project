@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.week.zumgnmarket.common.QTown.*;
 import static com.week.zumgnmarket.product.entity.QProduct.product;
+import static com.week.zumgnmarket.town.entity.QTown.town;
 
 @Repository
 @RequiredArgsConstructor
