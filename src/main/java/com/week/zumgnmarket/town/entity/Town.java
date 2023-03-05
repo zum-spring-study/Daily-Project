@@ -1,5 +1,6 @@
-package com.week.zumgnmarket.common;
+package com.week.zumgnmarket.town.entity;
 
+import com.week.zumgnmarket.common.BaseEntity;
 import com.week.zumgnmarket.product.entity.Product;
 import com.week.zumgnmarket.enums.LocationNames;
 import lombok.AccessLevel;
