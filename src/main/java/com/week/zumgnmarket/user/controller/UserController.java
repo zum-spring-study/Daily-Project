@@ -5,8 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.week.zumgnmarket.user.domain.dto.UserRequest;
-import com.week.zumgnmarket.user.domain.dto.UserResponse;
+import com.week.zumgnmarket.user.dto.UserRequest;
+import com.week.zumgnmarket.user.dto.UserResponse;
 import com.week.zumgnmarket.user.exception.UserNotFoundException;
 import com.week.zumgnmarket.user.service.UserService;
 
@@ -22,12 +22,12 @@ public class UserController {
 
 	@PostMapping("/create")
 	public ResponseEntity<UserResponse> create(@RequestBody UserRequest request) {
-		return ResponseEntity.ok(UserResponse.create(userService.create(request.toUser())));
+		return ResponseEntity.ok(UserResponse.of(userService.create(request.toUser())));
 	}
 
 	@GetMapping("/{userId}")
 	public ResponseEntity<UserResponse> findUserById(@PathVariable Long userId) {
-		return ResponseEntity.ok(UserResponse.create(userService.findUserById(userId)));
+		return ResponseEntity.ok(UserResponse.of(userService.findUserById(userId)));
 	}
 
 	@ExceptionHandler(UserNotFoundException.class)

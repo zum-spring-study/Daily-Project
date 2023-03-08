@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.week.zumgnmarket.user.domain.User;
-import com.week.zumgnmarket.user.domain.UserTest;
+import com.week.zumgnmarket.user.entity.User;
+import com.week.zumgnmarket.user.entity.UserTest;
 
 @SpringBootTest
 @Transactional

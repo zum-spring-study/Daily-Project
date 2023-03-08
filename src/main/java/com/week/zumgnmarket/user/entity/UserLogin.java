@@ -1,4 +1,4 @@
-package com.week.zumgnmarket.user.domain;
+package com.week.zumgnmarket.user.entity;
 
 import java.util.Objects;
 

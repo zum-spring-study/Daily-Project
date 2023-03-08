@@ -1,6 +1,6 @@
-package com.week.zumgnmarket.user.domain.dto;
+package com.week.zumgnmarket.user.dto;
 
-import com.week.zumgnmarket.user.domain.User;
+import com.week.zumgnmarket.user.entity.User;
 
 public class UserResponse {
 	final String name;
@@ -11,7 +11,7 @@ public class UserResponse {
 		this.email = email;
 	}
 
-	public static UserResponse create(User user) {
+	public static UserResponse of(User user) {
 		return new UserResponse(user.getName(), user.getUserLogin().getEmail());
 	}
 }

@@ -1,6 +1,6 @@
-package com.week.zumgnmarket.user.domain.dto;
+package com.week.zumgnmarket.user.dto;
 
-import com.week.zumgnmarket.user.domain.User;
+import com.week.zumgnmarket.user.entity.User;
 
 import lombok.Getter;
 

@@ -1,6 +1,8 @@
-package com.week.zumgnmarket.user.domain;
+package com.week.zumgnmarket.user.entity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 }

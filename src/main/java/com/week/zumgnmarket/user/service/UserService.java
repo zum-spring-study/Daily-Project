@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.week.zumgnmarket.user.domain.User;
-import com.week.zumgnmarket.user.domain.UserRepository;
+import com.week.zumgnmarket.user.entity.User;
+import com.week.zumgnmarket.user.entity.UserRepository;
 import com.week.zumgnmarket.user.exception.UserNotFoundException;
 
 import lombok.RequiredArgsConstructor;
@@ -27,5 +27,4 @@ public class UserService {
 		return userRepository.findById(id)
 			.orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
 	}
-
 }
