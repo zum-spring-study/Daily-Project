@@ -50,7 +50,7 @@ public class ItemServiceTest {
 		CityTest.경기도 = cityRepository.save(CityTest.경기도);
 		CityTest.제주도 = cityRepository.save(CityTest.제주도);
 
-		ItemTest.연필 = itemService.create(ItemTest.연필);
+		ItemTest.연필 = itemRepository.save(ItemTest.연필);
 		ItemTest.공책 = itemRepository.save(ItemTest.공책);
 		ItemTest.커피쿠폰 = itemRepository.save(ItemTest.커피쿠폰);
 	}

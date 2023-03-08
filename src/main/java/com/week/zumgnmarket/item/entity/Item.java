@@ -57,6 +57,10 @@ public class Item extends BaseEntity {
 		this.sold = false;
 	}
 
+	public void updateTradeStatus(){
+		this.sold = true;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;

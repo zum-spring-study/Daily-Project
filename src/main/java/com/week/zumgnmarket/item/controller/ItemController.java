@@ -11,7 +11,7 @@ import com.week.zumgnmarket.item.service.ItemService;
 
 import lombok.RequiredArgsConstructor;
 
-@RestController
+@RestControllerAdvice
 @RequiredArgsConstructor
 @RequestMapping("/items")
 public class ItemController {
@@ -24,7 +24,7 @@ public class ItemController {
 		return ResponseEntity.ok(ItemResponse.of(itemService.create(itemService.toItem(request))));
 	}
 
-	@PostMapping("/{itemId}")
+	@GetMapping("/{itemId}")
 	public ResponseEntity<ItemResponse> getItem(@PathVariable Long itemId) {
 		return ResponseEntity.ok(ItemResponse.of(itemService.findById(itemId)));
 	}
