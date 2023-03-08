@@ -1,4 +1,4 @@
-package com.week.zumgnmarket.item.domain;
+package com.week.zumgnmarket.item.entity;
 
 import java.util.ArrayList;
 import java.util.List;
