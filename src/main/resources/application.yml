@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/zumgnmarket?useSSL=false&serverTimezone=Asia/Seoul
+    username: root
+    password:
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+logging:
+  level:
+    org.hibernate.sql: debug
+    org.hibernate.type: trace
