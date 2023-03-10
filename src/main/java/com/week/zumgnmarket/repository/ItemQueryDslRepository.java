@@ -1,6 +1,7 @@
 package com.week.zumgnmarket.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.week.zumgnmarket.constant.TownType;
 import com.week.zumgnmarket.domain.Item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -23,7 +24,7 @@ public class ItemQueryDslRepository {
      * @param region 지역명
      * @return
      */
-    public List<Item> findAllByRegion(String region) {
+    public List<Item> findAllByRegion(TownType region) {
         return jpaQueryFactory.selectFrom(item)
                 .join(item.seller, user).fetchJoin()
                 .join(item.town, town).fetchJoin()

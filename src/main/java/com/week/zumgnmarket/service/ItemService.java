@@ -2,6 +2,7 @@ package com.week.zumgnmarket.service;
 
 import com.week.zumgnmarket.application.dto.ItemRequest;
 import com.week.zumgnmarket.application.dto.ItemResponse;
+import com.week.zumgnmarket.constant.TownType;
 import com.week.zumgnmarket.domain.Item;
 import com.week.zumgnmarket.domain.Shop;
 import com.week.zumgnmarket.domain.User;
@@ -37,7 +38,7 @@ public class ItemService {
         return ItemResponse.of(item);
     }
 
-    public List<ItemResponse> findAllByRegion(String region) {
+    public List<ItemResponse> findAllByRegion(TownType region) {
         /**
          * Fetch Join 을 하지 않았을 경우 N+1 발생
          * -> N => 상품을 등록한 사람수만큼 !

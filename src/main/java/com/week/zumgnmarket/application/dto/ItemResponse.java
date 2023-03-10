@@ -1,5 +1,6 @@
 package com.week.zumgnmarket.application.dto;
 
+import com.week.zumgnmarket.constant.TownType;
 import com.week.zumgnmarket.domain.Item;
 import com.week.zumgnmarket.domain.Shop;
 import lombok.Builder;
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 @Getter
 public class ItemResponse {
     private String sellerName;
-    private String region;
+    private TownType region;
     private Integer itemId;
     private String itemName;
     private LocalDate tradingDate;

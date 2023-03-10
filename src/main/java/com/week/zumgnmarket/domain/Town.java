@@ -1,5 +1,6 @@
 package com.week.zumgnmarket.domain;
 
+import com.week.zumgnmarket.constant.TownType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,10 +18,11 @@ public class Town {
     @Column(name = "town_idx")
     private Integer id;
 
-    @Column(name = "region")
-    private String region;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "region", nullable = false)
+    private TownType region;
 
-    public static Town of(String region) {
+    public static Town of(TownType region) {
         return Town.builder()
                 .region(region).build();
     }

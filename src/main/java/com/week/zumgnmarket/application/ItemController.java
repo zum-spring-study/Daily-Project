@@ -31,7 +31,7 @@ public class ItemController {
      */
     @GetMapping("/items")
     public List<ItemResponse> findItemsByRegion(@RequestParam TownType town) {
-        return itemService.findAllByRegion(town.getRegion());
+        return itemService.findAllByRegion(town);
     }
 
     /**

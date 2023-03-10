@@ -16,7 +16,7 @@ public class UserResponse {
         return UserResponse.builder()
                 .userId(user.getId())
                 .nickName(user.getNickName())
-                .region(TownType.of(user.getTown().getRegion()))
+                .region(user.getTown().getRegion())
                 .build();
     }
 }
