@@ -9,10 +9,11 @@ spring:
     password:
   jpa:
     database: mysql
-    show-sql: true
+#    show-sql: true
     hibernate:
       ddl-auto: update
 logging:
   level:
-    org.hibernate.sql: debug
-    org.hibernate.type: trace
+    root: error
+#    org.hibernate.sql: debug
+#    org.hibernate.type: trace

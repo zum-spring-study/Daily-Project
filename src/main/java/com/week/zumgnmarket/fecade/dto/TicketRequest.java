@@ -13,4 +13,11 @@ public class TicketRequest {
     private Integer buyerId;
     private Integer musicalId;
     private LocalDate TicketingDate;
+
+    public static TicketRequest of(Integer buyerId, Integer musicalId, LocalDate TicketingDate) {
+        return TicketRequest.builder()
+                .buyerId(buyerId)
+                .musicalId(musicalId)
+                .TicketingDate(TicketingDate).build();
+    }
 }

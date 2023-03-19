@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Purchase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "purchase")
+    @Column(name = "purchase_idx")
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
