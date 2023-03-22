@@ -20,7 +20,7 @@ import com.week.zumgnmarket.user.entity.User;
 import com.week.zumgnmarket.user.entity.UserRepository;
 
 @SpringBootTest
-public class OptimisticLockOrderServiceTest {
+public class RedissonLockOrderServiceTest {
 
 	@Autowired
 	private UserRepository userRepository;
@@ -57,11 +57,7 @@ public class OptimisticLockOrderServiceTest {
 		for (int i = 0; i < thread; i++) {
 			executorService.execute(() -> {
 				//TODO: 미해결 - 변경감지가 일어나지 않는 이슈
-				try {
-					orderFacade.orderWithOptimisticLock(new OrderRequest(회원.getId(), 티켓.getId(), 1));
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				orderFacade.orderWithRedisson(new OrderRequest(회원.getId(), 티켓.getId(), 1));
 				countDownLatch.countDown();
 			});
 		}

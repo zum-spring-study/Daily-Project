@@ -6,8 +6,10 @@ import com.week.zumgnmarket.user.entity.User;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class OrderResponse {
 	public Long orderId;
 	public Long userId;

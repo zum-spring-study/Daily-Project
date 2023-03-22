@@ -1,5 +1,9 @@
 package com.week.zumgnmarket.order.controller;
 
+import java.util.concurrent.TimeUnit;
+
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
 
 import com.week.zumgnmarket.order.dto.OrderRequest;
@@ -20,6 +24,7 @@ public class OrderFacade {
 	private final UserService userService;
 	private final TicketService ticketService;
 	private final OrderService orderService;
+	private final RedissonClient redissonClient;
 
 	public OrderResponse order(OrderRequest request) {
 		User user = userService.getUser(request.getUserId());
@@ -29,7 +34,7 @@ public class OrderFacade {
 		return OrderResponse.of(order, user, ticket);
 	}
 
-	public OrderResponse orderWithPLock(OrderRequest request) {
+	public OrderResponse orderWithPessimisticLock(OrderRequest request) {
 		User user = userService.getUser(request.getUserId());
 		Ticket ticket = ticketService.getTicketWithPessimisticLock(request.getTicketId());
 		Order order = orderService.orderTicket(user, ticket, request.getQuantity());
@@ -37,7 +42,7 @@ public class OrderFacade {
 		return OrderResponse.of(order, user, ticket);
 	}
 
-	public OrderResponse orderWithOLock(OrderRequest request) throws InterruptedException {
+	public OrderResponse orderWithOptimisticLock(OrderRequest request) throws InterruptedException {
 		User user = userService.getUser(request.getUserId());
 
 		//OptimisticLock 같은 경우 실패했을 때 재시도를 위해 while 을 사용하였습니다.
@@ -49,6 +54,24 @@ public class OrderFacade {
 			} catch (Exception e) {
 				Thread.sleep(10);
 			}
+		}
+	}
+
+	public OrderResponse orderWithRedisson(OrderRequest request) {
+		User user = userService.getUser(request.getUserId());
+		RLock lock = redissonClient.getLock(request.getTicketId().toString());
+
+		try {
+			if (!lock.tryLock(2, 1, TimeUnit.SECONDS)) {
+				return new OrderResponse();
+			}
+			Ticket ticket = ticketService.getTicket(request.getTicketId());
+			Order order = orderService.orderTicket(user, ticket, request.getQuantity());
+			return OrderResponse.of(order, user, ticket);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		} finally {
+			lock.unlock();
 		}
 	}
 }
