@@ -27,8 +27,14 @@ public class TicketService {
 	}
 
 	@Transactional(readOnly = true)
-	public Ticket getTicketWithLock(Long id) {
-		return ticketQueryDslRepository.findByIdWithLock(id)
+	public Ticket getTicketWithPessimisticLock(Long id) {
+		return ticketQueryDslRepository.findByIdWithPessimisticLock(id)
+			.orElseThrow(() -> new EntityNotFoundException("Ticket not found with id: " + id));
+	}
+
+	@Transactional(readOnly = true)
+	public Ticket getTicketWithOptimisticLock(Long id) {
+		return ticketQueryDslRepository.findByIdWithOptimisticLock(id)
 			.orElseThrow(() -> new EntityNotFoundException("Ticket not found with id: " + id));
 	}
 }

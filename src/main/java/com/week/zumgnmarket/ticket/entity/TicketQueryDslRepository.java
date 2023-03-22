@@ -20,7 +20,14 @@ public class TicketQueryDslRepository {
 	private final JPAQueryFactory queryFactory;
 
 	@Lock(value = LockModeType.PESSIMISTIC_WRITE)
-	public Optional<Ticket> findByIdWithLock(Long id) {
+	public Optional<Ticket> findByIdWithPessimisticLock(Long id) {
+		return Optional.ofNullable(queryFactory.selectFrom(ticket)
+			.where(ticket.id.eq(id))
+			.fetchOne());
+	}
+
+	@Lock(value = LockModeType.OPTIMISTIC)
+	public Optional<Ticket> findByIdWithOptimisticLock(Long id) {
 		return Optional.ofNullable(queryFactory.selectFrom(ticket)
 			.where(ticket.id.eq(id))
 			.fetchOne());
