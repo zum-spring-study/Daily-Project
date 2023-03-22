@@ -14,18 +14,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.week.zumgnmarket.ticket.entity.Ticket;
 import com.week.zumgnmarket.ticket.entity.TicketRepository;
+import com.week.zumgnmarket.ticket.service.TicketService;
 import com.week.zumgnmarket.user.entity.User;
 import com.week.zumgnmarket.user.entity.UserRepository;
 
 @SpringBootTest
-public class SynchronizedOrderServiceTest {
+public class PessimisticLockOrderServiceTest {
 
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
 	private TicketRepository ticketRepository;
 	@Autowired
-	private SynchronizedOrderService orderService;
+	private TicketService ticketService;
+	@Autowired
+	private PessimisticLockOrderService orderService;
 
 	private User 회원;
 	private Ticket 티켓;
@@ -54,7 +57,8 @@ public class SynchronizedOrderServiceTest {
 		//when
 		for (int i = 0; i < thread; i++) {
 			executorService.execute(() -> {
-				orderService.orderTicket(회원, 티켓, 1);
+				//TODO: 미해결 - 변경감지가 일어나지 않는 이슈
+				orderService.orderTicket(회원, ticketService.getTicketWithLock(티켓.getId()), 1);
 				countDownLatch.countDown();
 			});
 		}
