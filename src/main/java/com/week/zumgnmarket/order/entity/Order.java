@@ -42,9 +42,17 @@ public class Order extends BaseEntity {
 	private int ticketCount;
 
 	@Builder
-	public Order(User user, Ticket ticket, int ticketCount) {
+	private Order(User user, Ticket ticket, int ticketCount) {
 		this.user = user;
 		this.ticket = ticket;
 		this.ticketCount = ticketCount;
+	}
+
+	public static Order of(User user, Ticket ticket, int ticketCount) {
+		return Order.builder()
+			.user(user)
+			.ticket(ticket)
+			.ticketCount(ticketCount)
+			.build();
 	}
 }

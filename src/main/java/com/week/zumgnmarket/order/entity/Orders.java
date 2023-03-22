@@ -12,7 +12,7 @@ import lombok.Getter;
 @Getter
 @Embeddable
 public class Orders {
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	List<Order> orders = new ArrayList<>();
 
 }

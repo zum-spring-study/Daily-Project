@@ -1,19 +1,12 @@
 package com.week.zumgnmarket.ticket.entity;
 
-import static javax.persistence.FetchType.*;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.week.zumgnmarket.common.domain.BaseEntity;
-import com.week.zumgnmarket.order.entity.Order;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -33,12 +26,23 @@ public class Ticket extends BaseEntity {
 
 	private int price;
 
-	private int remainingCount;
+	private int quantity;
 
 	@Builder
-	public Ticket(String name, int price, int remainingCount) {
+	public Ticket(String name, int price, int quantity) {
 		this.name = name;
 		this.price = price;
-		this.remainingCount = remainingCount;
+		this.quantity = quantity;
+	}
+
+	public void decreaseQuantity(int orderQuantity) {
+		checkQuantity(orderQuantity);
+		this.quantity -= orderQuantity;
+	}
+
+	private void checkQuantity(int orderQuantity) {
+		if (quantity == 0 || quantity < orderQuantity) {
+			throw new RuntimeException();
+		}
 	}
 }

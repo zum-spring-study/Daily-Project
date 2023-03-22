@@ -36,7 +36,7 @@ public class OrderRepositoryTest {
 	@Test
 	void 연관관계_매핑() {
 		//given
-		Order 주문 = new Order(회원, 티켓, 1);
+		Order 주문 = Order.of(회원, 티켓, 1);
 
 		//when
 		Order result = orderRepository.save(주문);
