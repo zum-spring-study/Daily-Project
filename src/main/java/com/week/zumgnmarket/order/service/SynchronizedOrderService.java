@@ -9,6 +9,13 @@ import com.week.zumgnmarket.user.entity.User;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * synchronized
+ * 문제) 서버가 한 대일 경우 문제가 없지만
+ * synchronized 는 각 프로세스 안에서만 보장이 되기 때문에
+ * 여러 서버 스레드에서 접근을 하게 된다면 race condition 이 발생할 수 있다.
+ * */
+
 @Service
 @RequiredArgsConstructor
 public class SynchronizedOrderService implements OrderService {

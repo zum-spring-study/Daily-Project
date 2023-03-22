@@ -1,6 +1,6 @@
 package com.week.zumgnmarket.order.controller;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.week.zumgnmarket.order.dto.OrderRequest;
 import com.week.zumgnmarket.order.dto.OrderResponse;
@@ -13,7 +13,7 @@ import com.week.zumgnmarket.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class OrderFacade {
 

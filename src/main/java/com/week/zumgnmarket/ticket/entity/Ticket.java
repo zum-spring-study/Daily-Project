@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.week.zumgnmarket.common.domain.BaseEntity;
+import com.week.zumgnmarket.ticket.exception.NotEnoughTicketException;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -42,7 +43,7 @@ public class Ticket extends BaseEntity {
 
 	private void checkQuantity(int orderQuantity) {
 		if (quantity == 0 || quantity < orderQuantity) {
-			throw new RuntimeException();
+			throw new NotEnoughTicketException();
 		}
 	}
 }
