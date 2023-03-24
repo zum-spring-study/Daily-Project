@@ -21,6 +21,10 @@ public class TicketService {
 
 	private final TicketQueryDslRepository ticketQueryDslRepository;
 
+	public Ticket save(Ticket ticket){
+		return ticketRepository.save(ticket);
+	}
+
 	@Transactional(readOnly = true)
 	public Ticket getTicket(Long id) {
 		return ticketRepository.findById(id)

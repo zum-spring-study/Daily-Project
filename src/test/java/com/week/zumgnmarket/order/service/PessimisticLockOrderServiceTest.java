@@ -12,12 +12,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.week.zumgnmarket.order.controller.OrderFacade;
+import com.week.zumgnmarket.order.dto.OrderRequest;
 import com.week.zumgnmarket.ticket.entity.Ticket;
 import com.week.zumgnmarket.ticket.entity.TicketRepository;
 import com.week.zumgnmarket.ticket.service.TicketService;
 import com.week.zumgnmarket.user.entity.User;
 import com.week.zumgnmarket.user.entity.UserRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @SpringBootTest
 public class PessimisticLockOrderServiceTest {
 
@@ -28,7 +33,7 @@ public class PessimisticLockOrderServiceTest {
 	@Autowired
 	private TicketService ticketService;
 	@Autowired
-	private PessimisticLockOrderService orderService;
+	private OrderFacade orderFacade;
 
 	private User 회원;
 	private Ticket 티켓;
@@ -57,14 +62,15 @@ public class PessimisticLockOrderServiceTest {
 		//when
 		for (int i = 0; i < thread; i++) {
 			executorService.execute(() -> {
-				//TODO: 미해결 - 변경감지가 일어나지 않는 이슈
-				orderService.orderTicket(회원, ticketService.getTicketWithPessimisticLock(티켓.getId()), 1);
+				orderFacade.orderWithPessimisticLock(new OrderRequest(회원.getId(), 티켓.getId(), 1));
+				log.info("남은 티켓 수량 : " + ticketService.getTicket(티켓.getId()).getQuantity());
 				countDownLatch.countDown();
 			});
 		}
 		countDownLatch.await();
 
 		//then
-		assertEquals(0, 티켓.getQuantity());
+		Ticket result = ticketService.getTicket(티켓.getId());
+		assertEquals(result.getQuantity(), 0);
 	}
 }

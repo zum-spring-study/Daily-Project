@@ -16,9 +16,13 @@ import com.week.zumgnmarket.order.controller.OrderFacade;
 import com.week.zumgnmarket.order.dto.OrderRequest;
 import com.week.zumgnmarket.ticket.entity.Ticket;
 import com.week.zumgnmarket.ticket.entity.TicketRepository;
+import com.week.zumgnmarket.ticket.service.TicketService;
 import com.week.zumgnmarket.user.entity.User;
 import com.week.zumgnmarket.user.entity.UserRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @SpringBootTest
 public class RedissonLockOrderServiceTest {
 
@@ -26,6 +30,8 @@ public class RedissonLockOrderServiceTest {
 	private UserRepository userRepository;
 	@Autowired
 	private TicketRepository ticketRepository;
+	@Autowired
+	private TicketService ticketService;
 	@Autowired
 	private OrderFacade orderFacade;
 
@@ -56,14 +62,15 @@ public class RedissonLockOrderServiceTest {
 		//when
 		for (int i = 0; i < thread; i++) {
 			executorService.execute(() -> {
-				//TODO: 미해결 - 변경감지가 일어나지 않는 이슈
 				orderFacade.orderWithRedisson(new OrderRequest(회원.getId(), 티켓.getId(), 1));
+				log.info("남은 티켓 수량 : " + ticketService.getTicket(티켓.getId()).getQuantity());
 				countDownLatch.countDown();
 			});
 		}
 		countDownLatch.await();
 
 		//then
-		assertEquals(0, 티켓.getQuantity());
+		Ticket result = ticketService.getTicket(티켓.getId());
+		assertEquals(result.getQuantity(), 0);
 	}
 }

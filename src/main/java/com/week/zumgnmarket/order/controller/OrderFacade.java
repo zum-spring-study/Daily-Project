@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.week.zumgnmarket.order.dto.OrderRequest;
 import com.week.zumgnmarket.order.dto.OrderResponse;
@@ -18,6 +19,7 @@ import com.week.zumgnmarket.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 
 @Component
+@Transactional
 @RequiredArgsConstructor
 public class OrderFacade {
 
